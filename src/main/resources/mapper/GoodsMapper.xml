@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.sun.babytun.Mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="seu.sun.babytun.Model.Goods">
+    <!--@mbg.generated-->
+    <!--@Table t_goods-->
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="original_cost" jdbcType="REAL" property="originalCost" />
+    <result column="current_price" jdbcType="REAL" property="currentPrice" />
+    <result column="discount" jdbcType="REAL" property="discount" />
+    <result column="is_free_delivery" jdbcType="INTEGER" property="isFreeDelivery" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    goods_id, title, sub_title, original_cost, current_price, discount, is_free_delivery, 
+    category_id, last_update_time
+  </sql>
+  <select id="selectByExample" parameterType="seu.sun.babytun.Model.GoodsExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="seu.sun.babytun.Model.GoodsExample">
+    <!--@mbg.generated-->
+    delete from t_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="goods_id" keyProperty="goodsId" parameterType="seu.sun.babytun.Model.Goods" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_goods (title, sub_title, original_cost, 
+      current_price, discount, is_free_delivery, 
+      category_id, last_update_time)
+    values (#{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, #{originalCost,jdbcType=REAL}, 
+      #{currentPrice,jdbcType=REAL}, #{discount,jdbcType=REAL}, #{isFreeDelivery,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=INTEGER}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="goods_id" keyProperty="goodsId" parameterType="seu.sun.babytun.Model.Goods" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subTitle != null">
+        sub_title,
+      </if>
+      <if test="originalCost != null">
+        original_cost,
+      </if>
+      <if test="currentPrice != null">
+        current_price,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="isFreeDelivery != null">
+        is_free_delivery,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalCost != null">
+        #{originalCost,jdbcType=REAL},
+      </if>
+      <if test="currentPrice != null">
+        #{currentPrice,jdbcType=REAL},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="isFreeDelivery != null">
+        #{isFreeDelivery,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="seu.sun.babytun.Model.GoodsExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from t_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update t_goods
+    <set>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subTitle != null">
+        sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalCost != null">
+        original_cost = #{record.originalCost,jdbcType=REAL},
+      </if>
+      <if test="record.currentPrice != null">
+        current_price = #{record.currentPrice,jdbcType=REAL},
+      </if>
+      <if test="record.discount != null">
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.isFreeDelivery != null">
+        is_free_delivery = #{record.isFreeDelivery,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastUpdateTime != null">
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update t_goods
+    set goods_id = #{record.goodsId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      original_cost = #{record.originalCost,jdbcType=REAL},
+      current_price = #{record.currentPrice,jdbcType=REAL},
+      discount = #{record.discount,jdbcType=REAL},
+      is_free_delivery = #{record.isFreeDelivery,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="seu.sun.babytun.Model.Goods">
+    <!--@mbg.generated-->
+    update t_goods
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalCost != null">
+        original_cost = #{originalCost,jdbcType=REAL},
+      </if>
+      <if test="currentPrice != null">
+        current_price = #{currentPrice,jdbcType=REAL},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="isFreeDelivery != null">
+        is_free_delivery = #{isFreeDelivery,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="seu.sun.babytun.Model.Goods">
+    <!--@mbg.generated-->
+    update t_goods
+    set title = #{title,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      original_cost = #{originalCost,jdbcType=REAL},
+      current_price = #{currentPrice,jdbcType=REAL},
+      discount = #{discount,jdbcType=REAL},
+      is_free_delivery = #{isFreeDelivery,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+<!--auto generated by MybatisCodeHelper on 2020-09-07-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_goods
+  </select>
+<!--auto generated by MybatisCodeHelper on 2020-09-07-->
+  <select id="selectAllByLastUpdateTime" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_goods
+    where last_update_time>=now()-interval 30 minute
+  </select>
+</mapper>

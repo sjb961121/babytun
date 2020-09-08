@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/babytun?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 961121
+  thymeleaf:
+    mode: HTML
+  redis:
+    database: 3
+    host: 127.0.0.1
+    jedis:
+      pool:
+        max-active: 100
+        max-idle: 100
+        min-idle: 10
+        max-wait: 1000ms
+    password: 961121
+#  freemarker:
+#    template-loader-path: classpath:/templates
+#    suffix: .ftl
+mybatis:
+    mapper-locations: classpath:/mapper/*.xml
+    configuration:
+      map-underscore-to-camel-case: true
+#  # 默认路径
+#  thymeleaf.prefix: classpath:/templates/
+#  # 后缀
+#  thymeleaf.suffix: .html
+#  # 模板格式
+#  thymeleaf.mode: HTML5
+#  thymeleaf.encoding: UTF-8
+#  thymeleaf.content-type: text/html
+#  thymeleaf.cache: false

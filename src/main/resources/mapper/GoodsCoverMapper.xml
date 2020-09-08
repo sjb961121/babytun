@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.sun.babytun.Mapper.GoodsCoverMapper">
+  <resultMap id="BaseResultMap" type="seu.sun.babytun.Model.GoodsCover">
+    <!--@mbg.generated-->
+    <!--@Table t_goods_cover-->
+    <id column="gc_id" jdbcType="INTEGER" property="gcId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="gc_pic_url" jdbcType="VARCHAR" property="gcPicUrl" />
+    <result column="gc_thumb_url" jdbcType="VARCHAR" property="gcThumbUrl" />
+    <result column="gc_order" jdbcType="INTEGER" property="gcOrder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    gc_id, goods_id, gc_pic_url, gc_thumb_url, gc_order
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_cover
+    where gc_id = #{gcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_goods_cover
+    where gc_id = #{gcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="gc_id" keyProperty="gcId" parameterType="seu.sun.babytun.Model.GoodsCover" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_goods_cover (goods_id, gc_pic_url, gc_thumb_url, 
+      gc_order)
+    values (#{goodsId,jdbcType=INTEGER}, #{gcPicUrl,jdbcType=VARCHAR}, #{gcThumbUrl,jdbcType=VARCHAR}, 
+      #{gcOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="gc_id" keyProperty="gcId" parameterType="seu.sun.babytun.Model.GoodsCover" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_goods_cover
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="gcPicUrl != null">
+        gc_pic_url,
+      </if>
+      <if test="gcThumbUrl != null">
+        gc_thumb_url,
+      </if>
+      <if test="gcOrder != null">
+        gc_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="gcPicUrl != null">
+        #{gcPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gcThumbUrl != null">
+        #{gcThumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gcOrder != null">
+        #{gcOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="seu.sun.babytun.Model.GoodsCover">
+    <!--@mbg.generated-->
+    update t_goods_cover
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="gcPicUrl != null">
+        gc_pic_url = #{gcPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gcThumbUrl != null">
+        gc_thumb_url = #{gcThumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gcOrder != null">
+        gc_order = #{gcOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gc_id = #{gcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="seu.sun.babytun.Model.GoodsCover">
+    <!--@mbg.generated-->
+    update t_goods_cover
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      gc_pic_url = #{gcPicUrl,jdbcType=VARCHAR},
+      gc_thumb_url = #{gcThumbUrl,jdbcType=VARCHAR},
+      gc_order = #{gcOrder,jdbcType=INTEGER}
+    where gc_id = #{gcId,jdbcType=INTEGER}
+  </update>
+  <select id="selectBygid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_goods_cover
+    where goods_id = #{gId,jdbcType=INTEGER}
+</select>
+</mapper>
