@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seu.sun.babytun.Mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="seu.sun.babytun.Model.Order">
+    <!--@mbg.generated-->
+    <!--@Table t_order-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="recv_name" jdbcType="VARCHAR" property="recvName" />
+    <result column="recv_address" jdbcType="VARCHAR" property="recvAddress" />
+    <result column="recv_mobile" jdbcType="VARCHAR" property="recvMobile" />
+    <result column="postage" jdbcType="FLOAT" property="postage" />
+    <result column="amout" jdbcType="FLOAT" property="amout" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, order_no, order_status, userid, recv_name, recv_address, recv_mobile, postage, 
+    amout, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="seu.sun.babytun.Model.Order" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_order (order_no, order_status, userid,
+      recv_name, recv_address, recv_mobile, 
+      postage, amout, create_time
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, 
+      #{recvName,jdbcType=VARCHAR}, #{recvAddress,jdbcType=VARCHAR}, #{recvMobile,jdbcType=VARCHAR}, 
+      #{postage,jdbcType=FLOAT}, #{amout,jdbcType=FLOAT}, #{createTime,jdbcType=TIMESTAMP})
+<!--      <selectKey resultType="Long" keyProperty="orderId">-->
+<!--       SELECT LAST_INSERT_ID() AS ID-->
+<!--      </selectKey>-->
+  </insert>
+  <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="seu.sun.babytun.Model.Order" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="recvName != null">
+        recv_name,
+      </if>
+      <if test="recvAddress != null">
+        recv_address,
+      </if>
+      <if test="recvMobile != null">
+        recv_mobile,
+      </if>
+      <if test="postage != null">
+        postage,
+      </if>
+      <if test="amout != null">
+        amout,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="recvName != null">
+        #{recvName,jdbcType=VARCHAR},
+      </if>
+      <if test="recvAddress != null">
+        #{recvAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recvMobile != null">
+        #{recvMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="postage != null">
+        #{postage,jdbcType=FLOAT},
+      </if>
+      <if test="amout != null">
+        #{amout,jdbcType=FLOAT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="seu.sun.babytun.Model.Order">
+    <!--@mbg.generated-->
+    update t_order
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="recvName != null">
+        recv_name = #{recvName,jdbcType=VARCHAR},
+      </if>
+      <if test="recvAddress != null">
+        recv_address = #{recvAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recvMobile != null">
+        recv_mobile = #{recvMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="postage != null">
+        postage = #{postage,jdbcType=FLOAT},
+      </if>
+      <if test="amout != null">
+        amout = #{amout,jdbcType=FLOAT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="seu.sun.babytun.Model.Order">
+    <!--@mbg.generated-->
+    update t_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      recv_name = #{recvName,jdbcType=VARCHAR},
+      recv_address = #{recvAddress,jdbcType=VARCHAR},
+      recv_mobile = #{recvMobile,jdbcType=VARCHAR},
+      postage = #{postage,jdbcType=FLOAT},
+      amout = #{amout,jdbcType=FLOAT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+<!--auto generated by MybatisCodeHelper on 2020-09-16-->
+  <select id="findByOrderNo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_order
+    where order_no=#{orderNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

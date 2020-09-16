@@ -1,11 +1,17 @@
 package seu.sun.babytun.Service;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import seu.sun.babytun.Exception.SecKillException;
 import seu.sun.babytun.Mapper.PromotionSeckillMapper;
+import seu.sun.babytun.Model.Order;
 import seu.sun.babytun.Model.PromotionSeckill;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class SecKillService {
@@ -13,6 +19,9 @@ public class SecKillService {
     private PromotionSeckillMapper promotionSeckillMapper;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     public void seckill(Long psId,String userId,Integer num) throws SecKillException {
         PromotionSeckill promotionSeckill = promotionSeckillMapper.selectByPrimaryKey(psId);
         if (promotionSeckill==null){
@@ -40,4 +49,16 @@ public class SecKillService {
             throw new SecKillException("商品已被抢光");
         }
     }
+
+    public String sendOrdertoQueue(String userId){
+        System.out.println("向队列发送消息");
+        Map data=new HashMap();
+        data.put("userId",userId);
+        String orderNo= UUID.randomUUID().toString();
+        data.put("orderNo",orderNo);
+        rabbitTemplate.convertAndSend("exchange-order",null,data);
+        return orderNo;
+    }
+
+
 }

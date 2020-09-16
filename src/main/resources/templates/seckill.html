@@ -167,6 +167,7 @@
         $.getJSON("/seckill?psId=1&userId=u03",function (json) {
             if (json.code=="0"){
                 alert("恭喜获得抢购资格，快去下单吧");
+                console.info(json.data.orderNo);
             }
             else{
                 alert(json.message);

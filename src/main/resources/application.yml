@@ -20,6 +20,12 @@ spring:
         min-idle: 10
         max-wait: 1000ms
     password: 961121
+  rabbitmq:
+    virtual-host: /
+    listener:
+      simple:
+        prefetch: 10
+        acknowledge-mode: MANUAL
 #  freemarker:
 #    template-loader-path: classpath:/templates
 #    suffix: .ftl

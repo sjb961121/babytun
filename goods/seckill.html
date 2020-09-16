@@ -5,6 +5,7 @@
     <title>哇爱 孕产妇入院专用待产包【尖叫升级】12件套送8件升级为20件套待产包【专家型】</title>
     <link href="./layui/css/layui.css" rel="stylesheet">
     <script src="./layui/layui.all.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.all.js"></script>
     <style>
         .bb-info li {
             margin-top: 20px;
@@ -164,9 +165,19 @@
 
     var $=layui.$;
     $("#btnSecKill").click(function () {
-        $.getJSON("/seckill?psId=1&userId=u03",function (json) {
+        $.getJSON("/seckill?psId=1&userId=u008",function (json) {
             if (json.code=="0"){
                 alert("恭喜获得抢购资格，快去下单吧");
+                console.info(json.data.orderNo);
+                swal({
+                    title:"正在创建订单，请稍后...",
+                    timer: 3000,
+                    showConfirmButton:false,
+                    type:"info"
+                }).then(function () {
+                    // alert("触发成功")
+                    window.location.href="/checkorder?orderNo="+json.data.orderNo;
+                })
             }
             else{
                 alert(json.message);
