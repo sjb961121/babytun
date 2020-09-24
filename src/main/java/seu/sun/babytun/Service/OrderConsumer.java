@@ -18,7 +18,6 @@ public class OrderConsumer {
     @Autowired
     private OrderService orderService;
 
-
     @RabbitListener(bindings = @QueueBinding(value = @Queue("queue-order"),exchange = @Exchange("exchange-order")))
     public void handleMessage(@Payload Map data, Channel channel,@Headers Map<String,Object> headers){
         System.out.println("获取订单数据"+data);

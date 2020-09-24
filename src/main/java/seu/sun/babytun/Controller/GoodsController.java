@@ -3,8 +3,10 @@ package seu.sun.babytun.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -33,11 +35,26 @@ public class GoodsController {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Value("${server.port}")
+    private String port;
+
     Logger logger= LoggerFactory.getLogger(GoodsController.class);
 
     @GetMapping("/goods")
     public ModelAndView showGoods(@RequestParam Integer gid){
-        logger.info("gid:"+gid);
+        logger.info("port:"+port);
+        ModelAndView modelAndView=new ModelAndView("/goods");
+        Goods goods = goodsService.selectByPrimaryKey(gid);
+        modelAndView.addObject("goods",goods);
+        modelAndView.addObject("covers",goodsCoverService.selectBygid(gid));
+        modelAndView.addObject("details",goodsDetailService.selectBygoodsId(gid));
+        modelAndView.addObject("params",goodsParamService.selectBygoodsId(gid));
+        return modelAndView;
+    }
+
+    @GetMapping("/goods-{gid}.html")
+    public ModelAndView showGoodsnginx(@PathVariable("gid") Integer gid){
+        logger.info("port:"+port);
         ModelAndView modelAndView=new ModelAndView("/goods");
         Goods goods = goodsService.selectByPrimaryKey(gid);
         modelAndView.addObject("goods",goods);
@@ -91,6 +108,25 @@ public class GoodsController {
     @ResponseBody
     public List<GoodsEvaluate> findEvalutes(@PathVariable("goodsId") Long gId){
         return goodsEvaluateService.findEvaluates(gId);
+    }
+
+    @GetMapping("/login")
+    @ResponseBody
+    public String login(String user, WebRequest webRequest){
+        webRequest.setAttribute("user",user,webRequest.SCOPE_SESSION);
+        return "port:"+port+"login success";
+    }
+
+    @GetMapping("/checklogin")
+    @ResponseBody
+    public String checklogin(WebRequest webRequest){
+        String user = (String)webRequest.getAttribute("user", webRequest.SCOPE_SESSION);
+        if (user!=null){
+            return "port:"+port+",user"+user;
+        }
+        else {
+            return "port:"+port+"redirect to login";
+        }
     }
 
 
