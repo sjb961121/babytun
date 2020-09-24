@@ -26,7 +26,7 @@ public class AntiRefreshInterceptor implements HandlerInterceptor {
 
         if (redisTemplate.hasKey("anti:refresh:blacklist")){
             if (redisTemplate.opsForSet().isMember("anti:refresh:blacklist",remoteAddr)){
-                response.getWriter().println("检测到您的IP访问异常，已加入黑名单");
+                response.getWriter().println("检测到您的IP访问异常，已加入黑名单!");
                 return false;
             }
         }
